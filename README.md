@@ -1,4 +1,4 @@
-#Using jQuery 
+# Using jQuery 
 This example uses Ajax so you'll need a web server up and running
 
 * Open index.html in a browser.
@@ -25,6 +25,7 @@ The purpose of this practical is to re-write this example but use jQuery instead
 </body>
 ...
 ```
+
 In countries.js, comment out the existing JavaScript code, and add the following
 
 ```javascript
@@ -39,26 +40,26 @@ The $ sign is a call to the jQuery library. The above code simply states select 
 * http://learn.jquery.com/about-jquery/how-jquery-works/
 * http://learn.jquery.com/using-jquery-core/document-ready/
 
-###Using Ajax with jQuery
+### Using Ajax with jQuery
 First, we'll try and load the list of countries using Ajax. Have a look at http://api.jquery.com/jQuery.getJSON/ see if you can make an Ajax request to load the list of countries. For now simply display them in the console. If you get stuck the answers are at the bottom of these instructions.
 
-###Iterating over an array
+### Iterating over an array
 Inside this function can you iterate over the array of countries and display the name of each country in the console. Have a look at http://learn.jquery.com/using-jquery-core/iterating/ . If you get stuck the answers are at the bottom of these instructions.
 
-###DOM Manipulation
+### DOM Manipulation
 Next try, to make the name of each country appear inside the ul element, *nav*. Have a look at http://learn.jquery.com/using-jquery-core/manipulating-elements/, in particular creating elements (about halfway down the page) . If you get stuck the answers are at the bottom of these instructions.
 
-###Attaching Events
+### Attaching Events
 Now make each country name clickable. To start with, just display a simple console message, when any of the list items are clicked. See http://learn.jquery.com/events/event-basics/ . If you get stuck the answers are at the bottom of these instructions.
 
-###Displaying the country's details
+### Displaying the country's details
 Now, can you make the div element, *content*, display the details for the country that was clicked on? If you get stuck the answers are at the bottom of these instructions.
 
 Finally compare the original code, to your jQuery version, what do you think about the amount of code how easy it is to read, how easy it is to maintain?
 
-##Answers
+## Answers
 
-###Using Ajax with jQuery
+### Using Ajax with jQuery
 ```javascript
 $(document).ready(function(){
     $.getJSON("data/countries.json",function(countries){
@@ -68,7 +69,7 @@ $(document).ready(function(){
 
 ```
 
-###Iterating over an array
+### Iterating over an array
 ```javascript
 $(document).ready(function(){
     $.getJSON("data/countries.json",function(countries){
@@ -78,7 +79,7 @@ $(document).ready(function(){
     });
 });
 ```
-###DOM Manipulation
+### DOM Manipulation
 ```javascript
 $(document).ready(function(){
     $.getJSON("data/countries.json",function(countries){
@@ -89,7 +90,7 @@ $(document).ready(function(){
     });
 });
 ```
-###Attaching Events
+### Attaching Events
 ```javascript
 $(document).ready(function(){
     $.getJSON("data/countries.json",function(countries){
@@ -102,20 +103,14 @@ $(document).ready(function(){
     });
 });
 ```
-###Displaying the country's details
+### Displaying the country's details
 ```javascript
-function createHandler(country)
-{
-    //need to use a closure to link each link to a country object
-    return function(){
-        $("#content").html("The capital city is "+country.capital);
-    }
-}
-
 $(document).ready(function(){
     $.getJSON("data/countries.json",function(countries){
         $.each(countries, function(index,country){
-            var $newLi = $('<li>'+country.name+'</li>').click(createHandler(country))
+            var $newLi = $('<li>'+country.name+'</li>').click(function(){
+                $("#content").html("The capital city is "+country.capital);
+            })
             $("#nav").append($newLi);
         })
     });
